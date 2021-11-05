@@ -122,13 +122,13 @@ def main():
         print('Data From the Board')
         print(df.head(10))
 
-        filename = 'eeg-zage-test.csv'
+        filename = 'eeg-zage-eye-blinks.csv'
 
         DataFilter.write_file(data, filename, 'w')  # use 'a' for append mode
         restored_data = DataFilter.read_file(filename)
         restored_df = pd.DataFrame(np.transpose(restored_data))
-        print('Data From the File')
-        print(restored_df.head(10))
+        # print('Data From the File')
+        # print(restored_df.head(10))
 
 # using windows: python3 record-data.py --board-id 0 --serial-port 'COM3'
 if __name__ == "__main__":
