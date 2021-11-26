@@ -122,7 +122,7 @@ def main():
         print('Data From the Board')
         print(df.head(10))
 
-        filename = 'eeg-zage-eye-blinks.csv'
+        filename = 'eeg-toma-ssvep25Hz-4.csv'
 
         DataFilter.write_file(data, filename, 'w')  # use 'a' for append mode
         restored_data = DataFilter.read_file(filename)

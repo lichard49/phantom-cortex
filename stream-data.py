@@ -36,12 +36,12 @@ class Graph:
         self.win = pg.GraphicsWindow(title='BrainFlow Plot',size=(800, 600))
 
         # init curves and plots --> basically the same code, comment one out
-        # self._init_timeseries()
-        self._init_fft()
+        self._init_timeseries()
+        # self._init_fft()
 
         timer = QtCore.QTimer()
-        # timer.timeout.connect(self.update)
-        timer.timeout.connect(self.updateFFT)
+        timer.timeout.connect(self.update)
+        # timer.timeout.connect(self.updateFFT)
         timer.start(self.update_speed_ms)
         QtGui.QApplication.instance().exec_()
 
