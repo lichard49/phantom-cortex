@@ -81,15 +81,73 @@ def main():
 
     out = clf.predict(test)
 
-    print('preditions')
-    print(out)
-    print('correct')
-    print(train_y)
+    # print('preditions')
+    # print(out)
+    # print('correct')
+    # print(train_y)
 
     print('accuracy: '+ str(sklearn.metrics.accuracy_score(test_y, out)))
-
-    sklearn.metrics.plot_confusion_matrix(clf, test, test_y)  
+    plt.figure()
+    plt.plot(np.arange(len(test[0])), test[0])
     plt.show()
+
+    # accuracies = []
+    # estimators = np.arange(1, 100, 3)
+    # #[1, 10, 25, 50, 75, 100, 125, 150, 175, 200, 300, 400, 500, 1000]
+    # max_depths = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+    # for e in estimators:
+    #     acc_dep = []
+    #     for m in max_depths:
+    #         clf = RandomForestClassifier(random_state=0, max_depth=m, n_estimators=e)
+    #         clf.fit(train, train_y)
+    #         acc_dep.append(sklearn.metrics.accuracy_score(test_y, clf.predict(test)))
+    #     accuracies.append(acc_dep)
+    
+    # fig, ax = plt.subplots()
+    # im = ax.imshow(accuracies)
+
+    # # Show all ticks and label them with the respective list entries
+    # ax.set_xticks(np.arange(len(max_depths)), labels=max_depths)
+    # ax.set_yticks(np.arange(len(estimators)), labels=estimators)
+
+    # # Rotate the tick labels and set their alignment.
+    # plt.setp(ax.get_xticklabels(), rotation=45, ha="right",
+    #         rotation_mode="anchor")
+
+    # # Loop over data dimensions and create text annotations.
+    # for i in range(len(estimators)):
+    #     for j in range(len(max_depths)):
+    #         text = ax.text(j, i, round(accuracies[i][j], 2),
+    #                     ha="center", va="center", color="w")
+
+    # ax.set_title("Accuracy of SSVEP classifier with different max_depth and n_estimators")
+    # fig.tight_layout()
+    # plt.show()
+
+    # clf = RandomForestClassifier(random_state=0, max_depth=6, n_estimators=37)
+    # clf.fit(train, train_y)
+
+    # # Extract single tree
+    # estimator = clf.estimators_[5]
+
+    # from sklearn.tree import export_graphviz
+    # # Export as dot file
+    # export_graphviz(estimator, out_file='37_6.dot', 
+    #                 rounded = True, proportion = False, 
+    #                 precision = 2, filled = True)
+
+    # # Convert to png using system command (requires Graphviz)
+    # from subprocess import call
+    # call(['dot', '-Tpng', '37_6.dot', '-o', 'tree.png', '-Gdpi=600'])
+
+    # # Display in jupyter notebook
+    # from IPython.display import Image
+    # Image(filename = 'tree.png')
+
+
+    # sklearn.metrics.plot_confusion_matrix(clf, test, test_y)  
+    # plt.show()
 
 if __name__ == "__main__":
     main()
