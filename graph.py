@@ -9,6 +9,7 @@ from brainflow.board_shim import BoardShim, BrainFlowInputParams, BoardIds, Brai
 from brainflow.data_filter import DataFilter, FilterTypes, AggOperations, WindowFunctions, DetrendOperations
 # File functions
 from processing import standard_filter_timeseries
+from hardware_interfacing import InputSource, HeadSet, record
 
 # Graph_Timeseries Class
 class Graph_Timeseries:
@@ -107,3 +108,38 @@ class Graph_FFT:
                                    WindowFunctions.BLACKMAN_HARRIS.value)
             self.curves[count].setData(psd[0][:61]) # cut frequencies at 60Hz 
         self.app.processEvents()
+
+# Description -- assumption that the board the user is using is the CYTON BOARD
+
+# Notes
+# board_id = 0, serial_port = 'COM3' or '/dev/cu.usbserial-#####' for recording / streaming directly from headset 
+# board_id = -3, other_info="0" # for cyton and has to be string, filename = "__"
+# streaming pre-recorded data
+
+# param: graph_timeseries is a string that indicates whether the user expects to see a graph of timeseries or 
+# output:
+def display_data(input_source: InputSource, graph_timeseries):
+
+    # activate board
+    BoardShim.enable_dev_board_logger()
+
+    # check if recording
+    recording = isinstance(input_source, HeadSet) and input_source.filename != None
+
+    if recording and graph_timeseries == "fft":
+        print("Cannot record FFT data.")
+        return
+
+    board = BoardShim(input_source.board_id, input_source.params)
+    board.prepare_session()
+
+    board.start_stream(45000, '')
+    
+    # graphing
+    if graph_timeseries == "timeseries":
+        Graph_Timeseries(board)
+    elif graph_timeseries == "fft":
+        Graph_FFT(board)
+
+    if recording:
+        record(board, input_source.filename)
