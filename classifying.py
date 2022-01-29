@@ -65,3 +65,14 @@ def fit_model(model, train_X, train_Y, filename='model.pkl'):
 def load_model(filename='model.pkl'):
     return joblib.load(filename)
 
+# simple spectral analysis using max value of FFT
+# params: frequency domain data, range and labels for each value, range of frequency to inspect
+# output: highest band
+def spectral_analysis(fft, value, value_labels, range=(10, 31)):
+    # value = [(10, 14), (15, 19), (20, 24), (25, 29)]
+    # value_label = [12, 17, 22, 27]
+    freq = max(fft[range[0]:range[1]])
+    for i, b in enumerate(value):
+        if freq >= b[0] or freq <= b[1]:
+            freq = value_labels[i]
+    return freq
