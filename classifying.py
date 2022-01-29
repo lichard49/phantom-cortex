@@ -17,7 +17,6 @@ def get_windows(data, window_size):
         ch_data = ch_windowed # replace singel channel data with windowed data 
     return data
 
-
 # splits data into test and train sets
 # params: windowed data, corresponding labels, test_prop is optional proportion
 # output: test and train (window) data with corresponding labels
