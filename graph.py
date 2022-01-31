@@ -53,7 +53,7 @@ class Graph_Timeseries:
     def update(self):
         data = self.board_shim.get_current_board_data(self.num_points)
         # filtering
-        standard_filter_timeseries(self.exg_channels, self.sampling_rate)
+        standard_filter_timeseries(data, self.sampling_rate)
         for count, channel in enumerate(self.exg_channels):
             # plot timeseries
             self.plots[count].setYRange(self.allrange[0], self.allrange[1])
@@ -100,7 +100,7 @@ class Graph_FFT:
     def updateFFT(self):
         data = self.board_shim.get_current_board_data(self.num_points) # 8 ecg channels, each num pts long
          # filtering
-        standard_filter_timeseries(self.exg_channels, self.sampling_rate)
+        standard_filter_timeseries(data, self.sampling_rate)
         for count, channel in enumerate(self.exg_channels):
             # plot timeseries
             nfft = DataFilter.get_nearest_power_of_two(self.sampling_rate)
@@ -126,13 +126,13 @@ def display_data(input_source: InputSource, graph_timeseries):
     # check if recording
     recording = isinstance(input_source, HeadSet) and input_source.filename != None
 
-    if recording and graph_timeseries == "fft":
-        print("Cannot record FFT data.")
-        return
+    # if recording and graph_timeseries == "fft":
+    #     print("Cannot record FFT data.")
+    #     return
 
     board = BoardShim(input_source.board_id, input_source.params)
     board.prepare_session()
-
+    input_source.board = board # new
     board.start_stream(45000, '')
     
     # graphing

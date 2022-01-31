@@ -1,0 +1,25 @@
+{
+    "files": [
+        {
+            "filename": "ssvep-10Hz.csv", 
+            "labels": [
+                "ssvep", 
+                "10Hz"
+            ]
+        },
+        {
+            "filename": "ssvep-15Hz.csv",
+            "experiment": [
+                "ssvep"
+            ],
+            "labels": [
+                "15Hz",
+                "None"
+            ],
+            "timings": [
+                "0:10",
+                "10:20"
+            ]
+        }
+    ]
+}

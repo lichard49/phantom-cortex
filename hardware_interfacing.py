@@ -12,18 +12,18 @@ from brainflow.data_filter import DataFilter, FilterTypes, AggOperations, Window
 # Abstract class / parent class
 class InputSource:
     def __init__(self):
-        params = BrainFlowInputParams()
-        params.ip_port = 0
-        params.serial_port = ''
-        params.mac_address = ''
-        params.other_info = ''
-        params.serial_number = ''
-        params.ip_address = ''
-        params.ip_protocol = 0
-        params.timeout = 0
-        params.file = ''
+        self.params = BrainFlowInputParams()
+        self.params.ip_port = 0
+        self.params.serial_port = ''
+        self.params.mac_address = ''
+        self.params.other_info = ''
+        self.params.serial_number = ''
+        self.params.ip_address = ''
+        self.params.ip_protocol = 0
+        self.params.timeout = 0
+        self.params.file = ''
 
-        self.board_params = params
+        self.board = ''
 
 class HeadSet(InputSource):
     def __init__(self, serial_port: str, filename = None):
@@ -50,10 +50,3 @@ def record(board, filename):
     print(df.head(10))
 
     DataFilter.write_file(data, filename, 'w')  # use 'a' for append mode
-    restored_data = DataFilter.read_file(filename)
-    restored_df = pd.DataFrame(np.transpose(restored_data))
-
-
-
-
-
