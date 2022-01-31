@@ -1,6 +1,5 @@
 from brainflow.data_filter import DataFilter, FilterTypes, WindowFunctions, DetrendOperations
 
-
 # applies "standard" filters to raw timeseries (as deemed by BrainFlow)
 # param: raw timeseries (multichannel, idx0-7:ch1-8)
 # output: filtered timeseries (same dimensions)

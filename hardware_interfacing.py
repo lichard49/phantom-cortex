@@ -23,7 +23,7 @@ class InputSource:
         self.params.timeout = 0
         self.params.file = ''
 
-        self.board_params = self.params
+        self.board = ''
 
 class HeadSet(InputSource):
     def __init__(self, serial_port: str, filename = None):
@@ -50,10 +50,3 @@ def record(board, filename):
     print(df.head(10))
 
     DataFilter.write_file(data, filename, 'w')  # use 'a' for append mode
-    restored_data = DataFilter.read_file(filename)
-    restored_df = pd.DataFrame(np.transpose(restored_data))
-
-
-
-
-
