@@ -135,7 +135,6 @@ def display_data(input_source: InputSource, graph_timeseries):
     input_source.board = board # new
     board.start_stream(45000, '')
     
-
     # graphing
     if graph_timeseries == "timeseries":
         Graph_Timeseries(board)

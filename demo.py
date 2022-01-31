@@ -10,6 +10,7 @@ import time
 
 from brainflow import BoardShim
 
+
 def main():
     """
     Choose input source: either headset or file
