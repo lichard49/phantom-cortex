@@ -29,20 +29,27 @@ def main():
 
     """
 
-    # input = HeadSet("/dev/cu.usbserial-DM0258JS", "testing")
-    # display_data(input, "fft")
+    input = HeadSet("/dev/cu.usbserial-DM0258JS", "testing")
 
-    # while (True):
-    #     data = input.board.get_current_board_data(4 * BoardShim.get_sampling_rate(input.board_id))
-    #     fft = get_fft(data, BoardShim.get_sampling_rate(input.board_id))
+    print(input.params.serial_port)
 
-    #     prediction = spectral_analysis(fft, [(10, 14), (15, 19), (20, 24), (25, 29)], [12, 17, 22, 27])
+    input.init_board()
+    input.start_session()
 
-    #     time.sleep(0.5)
-    #     print(prediction)
+    print(input.board)
 
-    d = import_json("test.json")
-    print(d)
+    # testing real time classification
+    time.sleep(4)
+    while (True):
+        data = input.board.get_current_board_data(4 * BoardShim.get_sampling_rate(input.board_id))
+        fft = get_fft(data, BoardShim.get_sampling_rate(input.board_id))
+        prediction = spectral_analysis(fft[7], [(10, 14), (15, 19), (20, 24), (25, 29)], [12, 17, 22, 27])
+        time.sleep(0.5)
+        print(prediction)
+
+    # testing label.py and json
+    # d = import_json("test.json")
+    # print(d)
 
 if __name__ == "__main__":
     main()

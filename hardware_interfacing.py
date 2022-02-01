@@ -23,7 +23,10 @@ class InputSource:
         self.params.timeout = 0
         self.params.file = ''
 
-        self.board = ''
+        self.board = None
+
+    def stop_session(self):
+        self.board.stop_stream()
 
 class HeadSet(InputSource):
     def __init__(self, serial_port: str, filename = None):
@@ -31,6 +34,15 @@ class HeadSet(InputSource):
         self.params.serial_port = serial_port
         self.filename = filename
         self.board_id = 0
+    
+    def init_board(self):
+        self.board = BoardShim(self.board_id, self.params)
+
+    def start_session(self):
+        if self.board is None:
+            self.init_board()
+        self.board.prepare_session()
+        self.board.start_stream(45000, '')
 
 class File(InputSource):
     def __init__(self, filename):
@@ -50,3 +62,4 @@ def record(board, filename):
     print(df.head(10))
 
     DataFilter.write_file(data, filename, 'w')  # use 'a' for append mode
+    
