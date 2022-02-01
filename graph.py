@@ -129,17 +129,13 @@ def display_data(input_source: InputSource, graph_timeseries):
     # if recording and graph_timeseries == "fft":
     #     print("Cannot record FFT data.")
     #     return
-
-    board = BoardShim(input_source.board_id, input_source.params)
-    board.prepare_session()
-    input_source.board = board # new
-    board.start_stream(45000, '')
     
     # graphing
     if graph_timeseries == "timeseries":
-        Graph_Timeseries(board)
+        Graph_Timeseries(input_source.board)
     elif graph_timeseries == "fft":
-        Graph_FFT(board)
+        Graph_FFT(input_source.board)
 
+    print("recording now")
     if recording:
-        record(board, input_source.filename)
+        record(input_source.board, input_source.filename)

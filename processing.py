@@ -25,5 +25,5 @@ def get_fft(timeseries_data, sampling_rate, fft_min=0, fft_max=61):
         nfft = DataFilter.get_nearest_power_of_two(sampling_rate)
         psd = DataFilter.get_psd_welch(ch_data, nfft, nfft // 2, sampling_rate,
                                 WindowFunctions.BLACKMAN_HARRIS.value)
-        fft[ch] = psd[fft_min, fft_max]
+        fft[ch] = psd[0][fft_min:fft_max]
     return fft
