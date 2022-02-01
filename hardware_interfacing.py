@@ -62,4 +62,3 @@ def record(board, filename):
     print(df.head(10))
 
     DataFilter.write_file(data, filename, 'w')  # use 'a' for append mode
-    
