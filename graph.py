@@ -1,5 +1,3 @@
-# This file contains two graph classes, Graph_Timeseries and Graph_FFT, which graph timeseries and fast fourier transform data 
-
 # General imports
 import pyqtgraph as pg
 from pyqtgraph.Qt import QtGui, QtCore
@@ -109,16 +107,14 @@ class Graph_FFT:
             self.curves[count].setData(psd[0][:61]) # cut frequencies at 60Hz 
         self.app.processEvents()
 
-# Description -- assumption that the board the user is using is the CYTON BOARD
+"""
+Displays a timeseries or fft graph, and simultanesoulst records timeseries data depending on input
+NOTE: This function works under the assumption the board the user is using is the CYTON BOARD
 
-# Notes
-# board_id = 0, serial_port = 'COM3' or '/dev/cu.usbserial-#####' for recording / streaming directly from headset 
-# board_id = -3, other_info="0" # for cyton and has to be string, filename = "__"
-# streaming pre-recorded data
-
-# param: graph_timeseries is a string that indicates whether the user expects to see a graph of timeseries or 
-# output:
-def display_data(input_source: InputSource, graph_timeseries):
+params: an input source (i.e. a HeadSet or File), a string indicating what graph type to display
+output: a graph is displayed and data is potentially recorded, but no output is explicity returned
+"""
+def display_data(input_source: InputSource, graph_type):
 
     # activate board
     BoardShim.enable_dev_board_logger()
@@ -126,16 +122,11 @@ def display_data(input_source: InputSource, graph_timeseries):
     # check if recording
     recording = isinstance(input_source, HeadSet) and input_source.filename != None
 
-    # if recording and graph_timeseries == "fft":
-    #     print("Cannot record FFT data.")
-    #     return
-    
     # graphing
-    if graph_timeseries == "timeseries":
+    if graph_type == "timeseries":
         Graph_Timeseries(input_source.board)
-    elif graph_timeseries == "fft":
+    elif graph_type == "fft":
         Graph_FFT(input_source.board)
 
-    print("recording now")
     if recording:
         record(input_source.board, input_source.filename)

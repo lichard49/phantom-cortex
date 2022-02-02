@@ -1,13 +1,16 @@
+# General imports
 import sklearn
 from sklearn import model_selection
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.externals import joblib
-
 import numpy as np
 
-# divides data into windows
-# params: data in the dimensions of ch, samples
-# output:
+"""
+Divides data into windows
+
+params: data in the dimensions of ch, samples
+output:
+"""
 def get_windows(data, window_size):
     # iterate through each channel
     for ch_data in data:
@@ -17,9 +20,12 @@ def get_windows(data, window_size):
         ch_data = ch_windowed # replace singel channel data with windowed data 
     return data
 
-# splits data into test and train sets
-# params: windowed data, corresponding labels, test_prop is optional proportion
-# output: test and train (window) data with corresponding labels
+"""
+Splits data into test and train sets
+
+params: windowed data, corresponding labels, test_prop is optional proportion
+output: test and train (window) data with corresponding labels
+"""
 def get_test_train(data, labels, test_prop=0.1):
 
     # determine number of test and train sets
@@ -50,24 +56,33 @@ def get_test_train(data, labels, test_prop=0.1):
     
     return test_X, test_Y, train_X, train_Y
         
-# fits model based on training data and write model to file
-# params: 
-# output: 
+"""
+Fits model based on training data and write model to file
+
+params: 
+output: 
+"""
 def fit_model(model, train_X, train_Y, filename='model.pkl'):
     # model = RandomForestClassifier(random_state=0)
     model.fit(train_X, train_Y)
     # write model to file
     joblib.dump(model, filename)
 
-# loads saved model from .pkl file
-# params: filename of the saved model
-# output: model from saved file
+"""
+Loads saved model from .pkl file
+
+params: filename of the saved model
+output: model from saved file
+"""
 def load_model(filename='model.pkl'):
     return joblib.load(filename)
 
-# simple spectral analysis using max value of FFT
-# params: frequency domain data, range and labels for each value, range of frequency to inspect
-# output: highest band
+"""
+Simple spectral analysis using max value of FFT
+
+params: frequency domain data, range and labels for each value, range of frequency to inspect
+output: highest band
+"""
 def spectral_analysis(fft, value, value_labels, range=(10, 31)):
     # value = [(10, 14), (15, 19), (20, 24), (25, 29)]
     # value_label = [12, 17, 22, 27]

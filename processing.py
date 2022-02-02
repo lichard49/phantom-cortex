@@ -1,8 +1,12 @@
+# Brainflow
 from brainflow.data_filter import DataFilter, FilterTypes, WindowFunctions, DetrendOperations
 
-# applies "standard" filters to raw timeseries (as deemed by BrainFlow)
-# param: raw timeseries (multichannel, idx0-7:ch1-8)
-# output: filtered timeseries (same dimensions)
+"""
+Applies "standard" filters to raw timeseries (as deemed by BrainFlow)
+
+params: raw timeseries (multichannel, idx0-7:ch1-8)
+output: filtered timeseries (same dimensions)
+"""
 def standard_filter_timeseries(timeseries_data, sampling_rate):
     for ch, ch_data in enumerate(timeseries_data):
         DataFilter.detrend(ch_data, DetrendOperations.CONSTANT.value)
@@ -15,10 +19,13 @@ def standard_filter_timeseries(timeseries_data, sampling_rate):
         DataFilter.perform_bandstop(ch_data, sampling_rate, 60.0, 4.0, 2,
                                             FilterTypes.BUTTERWORTH.value, 0)
 
-# performs fast fourier transform on each channel
-# param: timeseries (multichannel, idx0-7:ch1-8), sampling rate of recording,
-#        minimum frequency of fft (default=0), maximum frequency of fft (default=61)
-# output: fft of each channel
+"""
+Performs fast fourier transform on each channel
+
+params: timeseries (multichannel, idx0-7:ch1-8), sampling rate of recording,
+        minimum frequency of fft (default=0), maximum frequency of fft (default=61)
+output: fft of each channel
+"""
 def get_fft(timeseries_data, sampling_rate, fft_min=0, fft_max=61):
     fft = [None] * len(timeseries_data)
     for ch, ch_data in enumerate(timeseries_data):

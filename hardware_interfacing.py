@@ -1,5 +1,3 @@
-# This file contains functionaluty which allows the user to stream and record data from various input sources (i.e. a Headset or File)
-
 # General imports
 from asyncore import file_dispatcher
 import pandas as pd
@@ -22,28 +20,39 @@ class InputSource:
         self.params.ip_protocol = 0
         self.params.timeout = 0
         self.params.file = ''
-
+        # users board
         self.board = None
 
-    def stop_session(self):
-        self.board.stop_stream()
-
-class HeadSet(InputSource):
-    def __init__(self, serial_port: str, filename = None):
-        InputSource.__init__(self)
-        self.params.serial_port = serial_port
-        self.filename = filename
-        self.board_id = 0
-    
+    """
+    Initializes the users CYTON BOARD
+    """
     def init_board(self):
         self.board = BoardShim(self.board_id, self.params)
 
+    """
+    Starts streaming from the users board
+    """
     def start_session(self):
         if self.board is None:
             self.init_board()
         self.board.prepare_session()
         self.board.start_stream(45000, '')
 
+    """
+    Stop streaming from the users board
+    """
+    def stop_session(self):
+        self.board.stop_stream()
+
+# HeadSet input source (recording and streaming capability)
+class HeadSet(InputSource):
+    def __init__(self, serial_port: str, filename = None):
+        InputSource.__init__(self)
+        self.params.serial_port = serial_port
+        self.filename = filename
+        self.board_id = 0
+
+# File input source (streaming capability)
 class File(InputSource):
     def __init__(self, filename):
         InputSource.__init__(self)
@@ -51,7 +60,13 @@ class File(InputSource):
         self.board_id = -3
         self.params.other_info = "0"
 
-# records data
+"""
+Records timeseries data from board and stores it in the given filename
+
+params: the users current board where they are gathering data,
+        a filename where the data will be stored
+output: nothing is explicitly returned
+"""
 def record(board, filename):
     data = board.get_board_data()  
     board.stop_stream()
