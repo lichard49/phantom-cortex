@@ -115,7 +115,6 @@ params: an input source (i.e. a HeadSet or File), a string indicating what graph
 output: a graph is displayed and data is potentially recorded, but no output is explicity returned
 """
 def display_data(input_source: InputSource, graph_type):
-
     # activate board
     BoardShim.enable_dev_board_logger()
 

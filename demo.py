@@ -36,7 +36,7 @@ def main():
         display_data(input_source, string that represents graph type you wish displayed)
             --> right now the only graph types available are: "timeseries" or "fft"
 
-    NOTE: You cannot display data and attempt to use real-time classification at the same time
+    NOTE: You cannot display data and attempt to use real-time classification at the same time (add multithreading)
     """
 
     input_source = HeadSet("/dev/cu.usbserial-DM0258JS", "testing")
