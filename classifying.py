@@ -38,7 +38,8 @@ def get_test_train(data, labels, test_prop=0.1):
     train_num = len(data) - test_num
 
     # randomly select test sets
-    test_indicies = np.random.rand(len(data), size=test_num)
+    # test_indicies = np.random.rand(len(data), size=test_num)
+    test_indicies = [1, 5, 13, 17, 21]
 
     # return variables / X and Y same length
     test_X = []

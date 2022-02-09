@@ -1,5 +1,6 @@
 # General Imports
 import json
+from brainflow import DataFilter
 
 """
 Parses json file into a dictionary
@@ -18,3 +19,7 @@ def import_json(json_filename):
         file_dict[f["filename"]] = f["labels"]
     json_data.close()
     return file_dict
+
+def load_data(filename):
+    readdata = DataFilter.read_file(filename)
+    return readdata

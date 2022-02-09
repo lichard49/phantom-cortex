@@ -1,0 +1,204 @@
+{
+    "files": [
+        {
+            "filename": "eeg-toma-ssvep05Hz-0.csv", 
+            "session": "toma-session-0",
+            "labels": [
+                "ssvep", 
+                "05Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep05Hz-1.csv", 
+            "session": "toma-session-1",
+            "labels": [
+                "ssvep", 
+                "05Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep05Hz-2.csv", 
+            "session": "toma-session-2",
+            "labels": [
+                "ssvep", 
+                "05Hz"
+            ] 
+        },
+        {
+            "filename": "eeg-toma-ssvep05Hz-3.csv", 
+            "session": "toma-session-3",
+            "labels": [
+                "ssvep", 
+                "05Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep05Hz-4.csv", 
+            "session": "toma-session-4",
+            "labels": [
+                "ssvep", 
+                "05Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep10Hz-0.csv", 
+            "session": "toma-session-0",
+            "labels": [
+                "ssvep", 
+                "10Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep10Hz-1.csv", 
+            "session": "toma-session-1",
+            "labels": [
+                "ssvep", 
+                "10Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep10Hz-2.csv", 
+            "session": "toma-session-2",
+            "labels": [
+                "ssvep", 
+                "10Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep10Hz-3.csv", 
+            "session": "toma-session-3",
+            "labels": [
+                "ssvep", 
+                "10Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep10Hz-4.csv", 
+            "session": "toma-session-4",
+            "labels": [
+                "ssvep", 
+                "10Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep15Hz-0.csv", 
+            "session": "toma-session-0",
+            "labels": [
+                "ssvep", 
+                "15Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep15Hz-1.csv", 
+            "session": "toma-session-1",
+            "labels": [
+                "ssvep", 
+                "15Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep15Hz-2.csv", 
+            "session": "toma-session-2",
+            "labels": [
+                "ssvep", 
+                "15Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep15Hz-3.csv", 
+            "session": "toma-session-3",
+            "labels": [
+                "ssvep", 
+                "15Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep15Hz-4.csv", 
+            "session": "toma-session-4",
+            "labels": [
+                "ssvep", 
+                "15Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep20Hz-0.csv", 
+            "session": "toma-session-0",
+            "labels": [
+                "ssvep", 
+                "20Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep20Hz-1.csv", 
+            "session": "toma-session-1",
+            "labels": [
+                "ssvep", 
+                "20Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep20Hz-2.csv", 
+            "session": "toma-session-2",
+            "labels": [
+                "ssvep", 
+                "20Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep20Hz-3.csv", 
+            "session": "toma-session-3",
+            "labels": [
+                "ssvep", 
+                "20Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep20Hz-4.csv", 
+            "session": "toma-session-4",
+            "labels": [
+                "ssvep", 
+                "20Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep25Hz-0.csv", 
+            "session": "toma-session-0",
+            "labels": [
+                "ssvep", 
+                "25Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep25Hz-1.csv", 
+            "session": "toma-session-1",
+            "labels": [
+                "ssvep", 
+                "25Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep25Hz-2.csv", 
+            "session": "toma-session-2",
+            "labels": [
+                "ssvep", 
+                "25Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep25Hz-3.csv", 
+            "session": "toma-session-3",
+            "labels": [
+                "ssvep", 
+                "25Hz"
+            ]
+        },
+        {
+            "filename": "eeg-toma-ssvep25Hz-4.csv", 
+            "session": "toma-session-4",
+            "labels": [
+                "ssvep", 
+                "25Hz"
+            ]
+        }
+    ]
+}
