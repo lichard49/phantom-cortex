@@ -54,8 +54,8 @@ class File(InputSource):
 # records data
 def record(board, filename):
     data = board.get_board_data()  
-    board.stop_stream()
-    board.release_session()
+    # board.stop_stream()
+    # board.release_session()
 
     df = pd.DataFrame(np.transpose(data))
     print('Data From the Board')

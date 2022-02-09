@@ -2,7 +2,7 @@
 from graph import display_data
 from hardware_interfacing import HeadSet, File
 from classifying import spectral_analysis
-from processing import get_fft
+from processing import apply_bandpass, get_fft
 from label import import_json
 
 import json
@@ -37,16 +37,17 @@ def main():
     input.init_board()
     input.start_session()
 
-    print(input.board)
+    display_data(input, "fft")
 
     # testing real time classification
     time.sleep(4)
     while (True):
         data = input.board.get_current_board_data(4 * BoardShim.get_sampling_rate(input.board_id))
+        apply_bandpass(data, BoardShim.get_sampling_rate(input.board_id), range=(8, 32))
         fft = get_fft(data, BoardShim.get_sampling_rate(input.board_id))
-        prediction = spectral_analysis(fft[7], [(10, 14), (15, 19), (20, 24), (25, 29)], [12, 17, 22, 27])
+        prediction = spectral_analysis(fft[7])
         time.sleep(0.5)
-        print(prediction)
+        print('highest frequency amplitutde is at:' + str(prediction) + ' Hz')
 
     # testing label.py and json
     # d = import_json("test.json")

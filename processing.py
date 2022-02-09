@@ -2,7 +2,7 @@ from brainflow.data_filter import DataFilter, FilterTypes, WindowFunctions, Detr
 
 # applies "standard" filters to raw timeseries (as deemed by BrainFlow)
 # param: raw timeseries (multichannel, idx0-7:ch1-8)
-# output: filtered timeseries (same dimensions)
+# output: applies filters to timeseries (same dimensions)
 def standard_filter_timeseries(timeseries_data, sampling_rate):
     for ch, ch_data in enumerate(timeseries_data):
         DataFilter.detrend(ch_data, DetrendOperations.CONSTANT.value)
@@ -14,6 +14,14 @@ def standard_filter_timeseries(timeseries_data, sampling_rate):
                                     FilterTypes.BUTTERWORTH.value, 0)
         DataFilter.perform_bandstop(ch_data, sampling_rate, 60.0, 4.0, 2,
                                             FilterTypes.BUTTERWORTH.value, 0)
+
+# applies bandpass for given range to "amplify" frequencies we care about 
+# params: multi-channel timeseries data, sampling rate, and optional range
+# output: applies bandpass to timeseries data (same dimensions)
+def apply_bandpass(timeseries_data, sampling_rate, order=2, range=(10, 40)):
+    for ch, ch_data in enumerate(timeseries_data):
+        DataFilter.perform_bandpass(ch_data, sampling_rate, range[0], range[1], order,
+                                    FilterTypes.BUTTERWORTH.value, 0)
 
 # performs fast fourier transform on each channel
 # param: timeseries (multichannel, idx0-7:ch1-8), sampling rate of recording,

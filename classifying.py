@@ -1,7 +1,9 @@
 import sklearn
 from sklearn import model_selection
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.externals import joblib
+import joblib
+
+from brainflow import DataFilter, FilterTypes
 
 import numpy as np
 
@@ -68,13 +70,13 @@ def load_model(filename='model.pkl'):
 # simple spectral analysis using max value of FFT
 # params: frequency domain data, range and labels for each value, range of frequency to inspect
 # output: highest band
-def spectral_analysis(fft, value, value_labels, range=(10, 31)):
+def spectral_analysis(fft, range=(8, 32)):
+    # def spectral_analysis(fft, value, value_labels, range=(10, 31)):
     # value = [(10, 14), (15, 19), (20, 24), (25, 29)]
     # value_label = [12, 17, 22, 27]
-    print(fft[range[0]:range[1]])
     freq = range[0]+np.argmax(fft[range[0]:range[1]])
-    print('freq: ' + str(freq))
-    for i, b in enumerate(value):
-        if freq >= b[0] and freq <= b[1]:
-            freq = value_labels[i]
+    # print('freq: ' + str(freq))
+    # for i, b in enumerate(value):
+    #     if freq >= b[0] and freq <= b[1]:
+    #         freq = value_labels[i]
     return freq
