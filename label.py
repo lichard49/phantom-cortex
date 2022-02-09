@@ -1,8 +1,13 @@
+# General Imports
 import json
 
-# to parse json file 
+"""
+Parses json file into a dictionary
 
-# open json file
+params: a valid json filename
+output: returns a dictionary where the keys are the filenames
+        and the values are the associated labels
+"""
 def import_json(json_filename):
     json_data = open(json_filename, "r")
     data = json.loads(json_data.read())
