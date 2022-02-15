@@ -7,7 +7,12 @@ from brainflow.board_shim import BoardShim, BrainFlowInputParams, BoardIds, Brai
 from brainflow.data_filter import DataFilter, FilterTypes, AggOperations, WindowFunctions, DetrendOperations
 # File functions
 from processing import standard_filter_timeseries
-from hardware_interfacing import InputSource, HeadSet, record
+from hardware_interfacing import InputSource, HeadSet, record, test_file_data_transfer, test_record
+import globals
+# Threading
+import threading
+import time
+from queue import Queue
 
 # Graph_Timeseries Class
 class Graph_Timeseries:
@@ -118,14 +123,75 @@ def display_data(input_source: InputSource, graph_type):
     # activate board
     BoardShim.enable_dev_board_logger()
 
+    # we begin collecting data
+    globals.startCollectingData()
+
     # check if recording
     recording = isinstance(input_source, HeadSet) and input_source.filename != None
 
+    # If we are recording, we will start two threads: (1) a recording thread and (2) a file thread
+    thread_record = None
+    thread_file_data_transfer = None
+
+    if recording: 
+        # start the recording stream
+        thread_record = threading.Thread(target=record, args=(input_source.board))
+        thread_record.start()
+
+        # start the file stream
+        thread_file_data_transfer = threading.Thread(target=file_data_transfer, args=(input_source.filename))
+        thread_file_data_transfer.start()
+
+    # Start graphing thread (i.e. continue running main)
+    graph(input_source, graph_type)
+
+    # On the main thread once the graphing is completed, gathering data is complete
+    globals.stopCollectingData()
+
+    # Join recording thread
+    if thread_record != None: 
+        thread_record.join()
+        thread_file_data_transfer.join()
+
+
+"""
+Displays a graph based on given graph type
+
+params: an InputSource (HeadSet or File) and a string representin the graph type to be displayed
+output: none
+"""
+def graph(input_source: InputSource, graph_type):
     # graphing
     if graph_type == "timeseries":
         Graph_Timeseries(input_source.board)
     elif graph_type == "fft":
         Graph_FFT(input_source.board)
 
-    if recording:
-        record(input_source.board, input_source.filename)
+
+#TESTING METHODS
+def test_display_data(experiment_labels):
+    # global collecting_data
+    q = Queue()
+    q.closed = False
+
+    # we begin collecting data
+    globals.startCollectingData()
+
+    # start the recording stream
+    thread_record = threading.Thread(target=test_record, args=(q,))
+    thread_record.start()
+
+    # start the file stream
+    thread_file_data_transfer = threading.Thread(target=test_file_data_transfer, args=("test", experiment_labels,))
+    thread_file_data_transfer.start()
+
+    for i in range(7):
+        q.put(i)
+
+    time.sleep(5)
+
+    # On the main thread once the graphing is completed, gathering data is complete
+    globals.stopCollectingData()
+
+    thread_record.join()
+    thread_file_data_transfer.join()

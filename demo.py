@@ -1,9 +1,11 @@
 # File functions
-from graph import display_data
+from graph import display_data, test_display_data
 from hardware_interfacing import HeadSet, File
 from classifying import spectral_analysis
 from processing import get_fft
 from label import import_json
+# from hardware_interfacing import queue_classification
+import globals
 # General imports
 import json
 import time
@@ -36,25 +38,20 @@ def main():
         display_data(input_source, string that represents graph type you wish displayed)
             --> right now the only graph types available are: "timeseries" or "fft"
 
-    NOTE: You cannot display data and attempt to use real-time classification at the same time (add multithreading)
+    NOTE: Before running this program make sure to initialize all global variables like such: globals.init()
     """
+    
+    test_experiment_labels = {
+        "filename": "test.py",
+        "user": "Zage Strassberg-Phillips",
+        "headset": "EEG",
+        "board": "Cyton",
+        "channels": "8"
+    }
 
-    input_source = HeadSet("/dev/cu.usbserial-DM0258JS", "testing")
-
-    input_source.init_board()
-    input_source.start_session()
-
-    # displaying data
-    display_data(input_source, "timeseries")
-
-    # real time classification
-    # time.sleep(4)
-    # while (True):
-    #     data = input_source.board.get_current_board_data(4 * BoardShim.get_sampling_rate(input_source.board_id))
-    #     fft = get_fft(data, BoardShim.get_sampling_rate(input_source.board_id))
-    #     prediction = spectral_analysis(fft[7], [(10, 14), (15, 19), (20, 24), (25, 29)], [12, 17, 22, 27])
-    #     time.sleep(0.5)
-    #     print(prediction)
+    globals.init()
+    test_display_data(test_experiment_labels)
+    globals.printClassifyQueue()
 
 if __name__ == "__main__":
     main()

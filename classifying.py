@@ -2,7 +2,7 @@
 import sklearn
 from sklearn import model_selection
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.externals import joblib
+# from sklearn.externals import joblib
 import numpy as np
 
 """
