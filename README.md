@@ -1,10 +1,10 @@
 # Phantom-Cortex
+{ Project Description and Purpose }
 
-# Project Description
+## How to Use
+1. Installation
+2. Running the Demo
 
-# How to Use
-
-# Credits
-
-Creators: Toma Itagaki and Zage Strassberg-Phillips
+## Credits
+Creators: Toma Itagaki and [Zage Strassberg-Phillips](https://github.com/zphillips)\
 Mentors: Richard Li
