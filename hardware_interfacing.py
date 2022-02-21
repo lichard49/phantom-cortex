@@ -64,7 +64,7 @@ class HeadSet(InputSource):
 class File(InputSource):
     def __init__(self, filename):
         InputSource.__init__(self)
-        self.filename = filename
+        self.params.file = filename
         self.board_id = -3
         self.params.other_info = "0"
 
@@ -98,6 +98,9 @@ params: a string representing a filename
 output: none
 """
 def file_data_transfer(filename):
+    # NOW ADD FILE TO JSON
+    # write_json(experiment_labels)
+
     # while we are collecting data pull from the queue
     while globals.collecting_data:
         if not globals.queue_file_data_transfer.empty():

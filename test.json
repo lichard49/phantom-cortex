@@ -1,9 +1,9 @@
 {
     "files": [
         {
-            "filename": "ssvep-10Hz.csv", 
+            "filename": "ssvep-10Hz.csv",
             "labels": [
-                "ssvep", 
+                "ssvep",
                 "10Hz"
             ]
         },

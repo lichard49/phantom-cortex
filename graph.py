@@ -7,7 +7,7 @@ from brainflow.board_shim import BoardShim, BrainFlowInputParams, BoardIds, Brai
 from brainflow.data_filter import DataFilter, FilterTypes, AggOperations, WindowFunctions, DetrendOperations
 # File functions
 from processing import standard_filter_timeseries
-from hardware_interfacing import InputSource, HeadSet, record, test_file_data_transfer, test_record
+from hardware_interfacing import InputSource, HeadSet, record, test_file_data_transfer, test_record, file_data_transfer
 import globals
 # Threading
 import threading
@@ -185,10 +185,11 @@ def test_display_data(experiment_labels):
     thread_file_data_transfer = threading.Thread(target=test_file_data_transfer, args=("test", experiment_labels,))
     thread_file_data_transfer.start()
 
-    for i in range(7):
+    for i in range(100000000000):
+        print(i)
         q.put(i)
 
-    time.sleep(5)
+    time.sleep(20)
 
     # On the main thread once the graphing is completed, gathering data is complete
     globals.stopCollectingData()

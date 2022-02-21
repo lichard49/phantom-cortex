@@ -41,17 +41,33 @@ def main():
     NOTE: Before running this program make sure to initialize all global variables like such: globals.init()
     """
     
+    # inside make this "labels": { metadata }
+    # if it fails still records data to test.json
+        # add some field that says the recording session was stopped/interrupted 
+    # Test with file -- Reach out to toma
+    # create requirements.txt and installation instructions
+    # https://stackoverflow.com/a/65738996 -- figure out how to remove pycache directory, then push branch to ensure gitignore works
     test_experiment_labels = {
-        "filename": "test.py",
-        "user": "Zage Strassberg-Phillips",
-        "headset": "EEG",
-        "board": "Cyton",
-        "channels": "8"
+        "labels": {
+            "filename": "test.py",
+            "user": "Zage Strassberg-Phillips",
+            "headset": "EEG",
+            "board": "Cyton",
+            "channels": "8"
+        }
     }
 
     globals.init()
-    test_display_data(test_experiment_labels)
-    globals.printClassifyQueue()
+    
+    input_source = File("eeg-alpha-1.csv")
+
+    input_source.init_board()
+    input_source.start_session()
+
+    display_data(input_source, "fft")
+
+    # test_display_data(test_experiment_labels)
+    # globals.printClassifyQueue()
 
 if __name__ == "__main__":
     main()
