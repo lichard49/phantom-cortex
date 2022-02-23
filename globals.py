@@ -1,11 +1,13 @@
 # General Imports
 from queue import Queue
 
-# Two queues: 
-#   (1) that holds data that can be pulled for real-time classification
-#   (2) that holds data that is slowly pulled and placed into designated file
+# Two queues:
+#   (1) that holds the board data to be pulled when the Graph updates 
+#   (2) that holds data that can be pulled for real-time classification
+#   (3) that holds data that is slowly pulled and placed into designated file
 # One boolean dictating whether we are still collecting data
 collecting_data = None
+queue_board_data = None
 queue_classification = None
 queue_file_data_transfer = None
 
@@ -17,13 +19,14 @@ output: None
 """
 def init():
     global collecting_data
+    global queue_board_data
     global queue_classification
     global queue_file_data_transfer
 
     collecting_data = False
+    queue_board_data = Queue()
     queue_classification = Queue()
     queue_file_data_transfer = Queue()
-
 
 """
 Sets the boolean collecting_data to True

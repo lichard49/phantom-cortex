@@ -75,12 +75,14 @@ params: the users current board where they are gathering data,
         a filename where the data will be stored
 output: nothing is explicitly returned
 """
-def record(board):
+def record():
     # while we are collecting data pull from the board
     while globals.collecting_data:
-        data = board.get_board_data() # all data from a board, removes from ringbuffer
-        globals.queue_classification.put(data)
-        globals.queue_file_data_transfer.put(data)
+        # data = board.get_board_data() # all data from a board, removes from ringbuffer
+        if not globals.queue_board_data.empty():
+            data = globals.queue_board_data.get()
+            globals.queue_classification.put(data)
+            globals.queue_file_data_transfer.put(data)
 
 # TESTING
 def test_record(board: Queue):

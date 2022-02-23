@@ -55,6 +55,12 @@ class Graph_Timeseries:
     # update timeseries data
     def update(self):
         data = self.board_shim.get_current_board_data(self.num_points)
+
+        # if you are recording, you have to place this data into a record global queue to be transfered
+        if globals.collecting_data:
+            data = self.board_shim.get_board_data() # all data from a board, removes from ringbuffer
+            globals.queue_board_data.put(data)
+
         # filtering
         standard_filter_timeseries(data, self.sampling_rate)
         for count, channel in enumerate(self.exg_channels):
@@ -135,11 +141,11 @@ def display_data(input_source: InputSource, graph_type):
 
     if recording: 
         # start the recording stream
-        thread_record = threading.Thread(target=record, args=(input_source.board))
+        thread_record = threading.Thread(target=record, args=())
         thread_record.start()
 
         # start the file stream
-        thread_file_data_transfer = threading.Thread(target=file_data_transfer, args=(input_source.filename))
+        thread_file_data_transfer = threading.Thread(target=file_data_transfer, args=(input_source.filename, ))
         thread_file_data_transfer.start()
 
     # Start graphing thread (i.e. continue running main)
