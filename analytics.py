@@ -16,7 +16,8 @@ output: visualizes and saves confusion matrix
 def plot_confusion_matrix(model, test_X, test_Y, title="Confusion Matrix", filename="default"):
     matrix = sklearn.metrics.plot_confusion_matrix(model, test_X, test_Y)
     plt.title(title)
-    plt.show(matrix)
+    matrix.plot()
+    plt.show()
     if filename != "default":
         plt.savefig(filename)
 

@@ -20,6 +20,12 @@ def import_json(json_filename):
     json_data.close()
     return file_dict
 
+"""
+Reads in brainflow csv
+
+params: a valid csv filename
+output: retuns 
+"""
 def load_data(filename):
     readdata = DataFilter.read_file(filename)
     return readdata

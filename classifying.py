@@ -16,12 +16,13 @@ output:
 """
 def get_windows(data, window_size):
     # iterate through each channel
+    return_data = []
     for ch_data in data:
         ch_windowed = []
         for i in np.arange(0, len(data[0])//window_size):
             ch_windowed.append(ch_data[i*window_size:(i*window_size)+window_size])
-        ch_data = ch_windowed # replace singel channel data with windowed data 
-    return data
+        return_data.append(ch_windowed) # replace single channel data with windowed data 
+    return return_data
 
 """
 Splits data into test and train sets
