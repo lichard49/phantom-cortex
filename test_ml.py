@@ -16,11 +16,13 @@ window_len = 2 # seconds
 
 window_len *= sampling_rate
 
+filenames = []
 data = []
 labels = []
 
 for f in d:
     print(file_loc + f)
+    filenames.append(f)
     readdata = load_data(file_loc + f)
     windowed = get_windows(readdata[1:9], window_len)
     print("windowed: ch x windows x wind_len"+str(np.shape(windowed)))
@@ -34,6 +36,8 @@ for f in d:
     print(np.shape(ch_data))
     data.append(np.concatenate(ch_data)) # window x FFT for each file
     labels.append(d[f][1]) # reading just the "Hz"
+
+print(filenames)
 
 print(np.shape(data))
 print(data[0])

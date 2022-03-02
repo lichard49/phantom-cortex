@@ -1,0 +1,31 @@
+{
+    "test": [
+        "eeg-toma-ssvep05Hz-1.csv",
+        "eeg-toma-ssvep10Hz-0.csv",
+        "eeg-toma-ssvep15Hz-3.csv",
+        "eeg-toma-ssvep20Hz-2.csv",
+        "eeg-toma-ssvep25Hz-4.csv"
+    ],
+    "train": [
+        "eeg-toma-ssvep05Hz-0.csv",
+        "eeg-toma-ssvep05Hz-2.csv",
+        "eeg-toma-ssvep05Hz-3.csv",
+        "eeg-toma-ssvep05Hz-4.csv",
+        "eeg-toma-ssvep10Hz-1.csv",
+        "eeg-toma-ssvep10Hz-2.csv",
+        "eeg-toma-ssvep10Hz-3.csv",
+        "eeg-toma-ssvep10Hz-4.csv",
+        "eeg-toma-ssvep15Hz-0.csv",
+        "eeg-toma-ssvep15Hz-1.csv",
+        "eeg-toma-ssvep15Hz-2.csv",
+        "eeg-toma-ssvep15Hz-4.csv",
+        "eeg-toma-ssvep20Hz-0.csv",
+        "eeg-toma-ssvep20Hz-1.csv",
+        "eeg-toma-ssvep20Hz-3.csv",
+        "eeg-toma-ssvep20Hz-4.csv",
+        "eeg-toma-ssvep25Hz-0.csv",
+        "eeg-toma-ssvep25Hz-1.csv",
+        "eeg-toma-ssvep25Hz-2.csv",
+        "eeg-toma-ssvep25Hz-3.csv"
+    ]
+}
