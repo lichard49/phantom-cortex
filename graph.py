@@ -99,7 +99,7 @@ class Graph_FFT:
         data = self.board_shim.get_current_board_data(self.num_points) # 8 ecg channels, each num pts long
          # filtering
         standard_filter_timeseries(data, self.sampling_rate)
-        apply_bandpass(data, self.sampling_rate, order=4, range=(8, 32))
+        # apply_bandpass(data, self.sampling_rate, order=4, range=(8, 32))
 
         for count, channel in enumerate(self.exg_channels):
             # plot timeseries

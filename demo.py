@@ -39,33 +39,36 @@ def main():
     NOTE: You cannot display data and attempt to use real-time classification at the same time
     """
 
-    input_source = HeadSet("/dev/cu.usbserial-DM0258JS", "testing")
+    input_source = HeadSet("/dev/cu.usbserial-DM0258JS", "ssvep12.csv")
 
-    display_data(input, "fft")
-
-    # testing real time classification
-    time.sleep(4)
-    while (True):
-        data = input.board.get_current_board_data(4 * BoardShim.get_sampling_rate(input.board_id))
-        apply_bandpass(data, BoardShim.get_sampling_rate(input.board_id), range=(8, 32))
-        fft = get_fft(data, BoardShim.get_sampling_rate(input.board_id))
-        prediction = spectral_analysis(fft[7])
-        time.sleep(0.5)
-        print('highest frequency amplitutde is at:' + str(prediction) + ' Hz')
     input_source.init_board()
-    input_source.start_session()
+    input_source.start_session()  
 
-    # displaying data
-    display_data(input_source, "timeseries")
+    display_data(input_source, "fft")
 
-    # real time classification
+    # # testing real time classification
     # time.sleep(4)
     # while (True):
-    #     data = input_source.board.get_current_board_data(4 * BoardShim.get_sampling_rate(input_source.board_id))
-    #     fft = get_fft(data, BoardShim.get_sampling_rate(input_source.board_id))
-    #     prediction = spectral_analysis(fft[7], [(10, 14), (15, 19), (20, 24), (25, 29)], [12, 17, 22, 27])
+    #     data = input.board.get_current_board_data(4 * BoardShim.get_sampling_rate(input.board_id))
+    #     apply_bandpass(data, BoardShim.get_sampling_rate(input.board_id), range=(8, 32))
+    #     fft = get_fft(data, BoardShim.get_sampling_rate(input.board_id))
+    #     prediction = spectral_analysis(fft[7])
     #     time.sleep(0.5)
-    #     print(prediction)
+    #     print('highest frequency amplitutde is at:' + str(prediction) + ' Hz')
+    # input_source.init_board()
+    # input_source.start_session()
+
+    # # displaying data
+    # display_data(input_source, "timeseries")
+
+    # # real time classification
+    # # time.sleep(4)
+    # # while (True):
+    # #     data = input_source.board.get_current_board_data(4 * BoardShim.get_sampling_rate(input_source.board_id))
+    # #     fft = get_fft(data, BoardShim.get_sampling_rate(input_source.board_id))
+    # #     prediction = spectral_analysis(fft[7], [(10, 14), (15, 19), (20, 24), (25, 29)], [12, 17, 22, 27])
+    # #     time.sleep(0.5)
+    # #     print(prediction)
 
 if __name__ == "__main__":
     main()
